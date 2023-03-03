@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Localizar endereço IP</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+      $(document).ready(function() {
+        $('#buscar').click(function() {
+          var ip = $('#endereco-ip').val();
+          $.getJSON('https://api.ipgeolocation.io/ipgeo?apiKey=201.11.219.59&ip=' + ip, function(data) {
+            $('#cidade').text(data.city);
+            $('#estado').text(data.region_name);
+            $('#pais').text(data.country_name);
+            $('#latitude').text(data.latitude);
+            $('#longitude').text(data.longitude);
+          });
+        });
+      });
+    </script>
+  </head>
+  <body>
+    <h1>Localizar endereço IP</h1>
+    <form>
+      <label for="endereco-ip">Digite o endereço IP:</label>
+      <input type="text" id="endereco-ip" name="endereco-ip"><br><br>
+      <button type="button" id="buscar">Buscar</button>
+    </form>
+    <h2>Informações de geolocalização</h2>
+    <p>Cidade: <span id="cidade"></span></p>
+    <p>Estado: <span id="estado"></span></p>
+    <p>País: <span id="pais"></span></p>
+    <p>Latitude: <span id="latitude"></span></p>
+    <p>Longitude: <span id="longitude"></span></p>
+  </body>
+</html>
